@@ -1,0 +1,37 @@
+head
+  title
+  script(src='./script2.js' defer)
+nav
+  a(href='/') Home
+  a(href='/form') Form
+h1=movie
+p#_id=_id
+p  
+img#poster(src=route)
+p
+  | You searched for 
+  span.details#movieName=movieName
+  |  which is rated  
+  span.details#rated=rated
+  |  and has a total runtime of 
+  span.details#runtime=runtime
+  | .
+  |  The genre(s) of this film are: 
+  span.details#genre=genre
+  | .
+p
+  | The film is directed by  
+  span.details#director=director
+  |  and features actors such as 
+  span.details#actors=actors
+  | .
+p
+  | The film was released in 
+  span.details#released=released
+  |  and currently boasts and IMDb score of   
+  span.details#score=score
+  | .
+p
+  | Synopsis: 
+  span.details#plot=plot
+button#favoriteButton(type='submit') Favorite

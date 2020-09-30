@@ -1,0 +1,37 @@
+html
+  head
+    link(href='https://fonts.googleapis.com/css2?family=Bangers&display=swap', rel='stylesheet')
+    title= title
+    link(rel='stylesheet', href='./css/index.css')
+  body
+    p#welcomeTitle Welcome to MovieSpot, your very own personal Movie Database!
+    section#container
+      h1= message
+      input#userInput(type='text') 
+      br
+      button#searchButton(type='submit') Search
+    div#faveContainer
+      h2 Your favorite films:
+      ul
+      each film in films
+        #faveItem
+          #faveText
+            #titleRow
+              b Title: 
+              span=film.Title
+            #directorRow
+              b Directed by: 
+              span=film.Director
+            #releasedRow
+              b Released: 
+              span=film.Date
+            #scoreRow
+              b Score: 
+              span=film.Score
+          #favePoster
+          img#poster(src=Poster)
+          #faveButns
+            button#detailsBtn(onclick=`getDetails("${film.Title}")`) Details
+            button#editBtn(onclick=`editFilmPage('${film.Title}')`) Edit
+            button(id=`deleteBtn${index}`, onclick=`deleteFilm("${film.Title}")`) Delete
+  script(src="script.js" defer)

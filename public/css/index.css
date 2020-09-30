@@ -1,0 +1,155 @@
+/**********GENERAL STYLING***********/
+
+* a {
+    text-decoration: none;
+}
+#id {
+    display: none;
+}
+
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    background-color: rgb(175,0,42);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: nowrap;
+}
+#container {
+    height: 300px;
+    width: 100%;
+    margin: 0px, 20px;
+    padding: 30px;
+    background-image: url(../img/cinemaSeats.jpg);
+    background-size: auto;
+    background-repeat: no-repeat;
+    border: solid black 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    /* font-family: Bangers; */
+    color: white;
+}
+
+/*************NAV BAR**********/
+
+nav {
+    height: 60px;
+    width: 100%;
+    padding: 20px;
+    border: aqua dotted 1px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-around;
+    
+}
+nav a {
+    height: 40px;
+    width: 100px;
+    padding: 10px;
+    border: black 1px solid;
+    border-radius: 25px;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 20px;
+    
+}
+#welcomeTitle {
+    margin: 0px;
+    padding: 30px;
+    height: 150px;
+}
+
+/************SEARCH SECTION************/
+
+#userInput {
+    width: 500px;
+    height: 80px;
+    border: 1px black solid;
+    border-radius: 20px;
+    font-size: 50px;
+    font-family: 'Fondamento', cursive;
+}
+#homeButtons {
+    width: 300px;
+    display: flex;
+    justify-content: space-evenly;  
+}
+#container button {
+    width: 170px;
+    height: 100px;
+    border-radius: 50px;
+}
+#searchBar p {
+    font-size: 25px;
+}
+#searchButton {
+    height: 70px;
+    width: 100px;
+    font-size: 40px;
+    font-family: 'Bangers', cursive;
+}
+
+/****************FONT****************/
+
+#welcomeTitle {
+    font-family: 'Bangers', cursive;
+    font-size: 70px;
+}
+h1{
+    font-family: 'Bangers', cursive;
+    font-size: 70px;
+    margin: 0px;
+    padding: 20px;
+}
+h2 {
+    font-family: 'Bangers', cursive;
+    font-size: 60px;
+    margin: 0px;
+    padding: 20px;
+}
+#faveText {
+    font-size: 30px;
+}
+
+
+/************FAVE SECTION************/
+
+#faveContainer {
+    width: 100%;
+    height: 1100px;
+    border: 2px dotted white;
+    display: flex;
+    flex-flow: column wrap;
+    text-align: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+#faveFilmSect{
+    margin: 0px;
+    padding: 0px;
+    height: 800px;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    /* background-image: url("../img/filmLLight.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; */
+}
+#faveItem {
+    height: 300px;
+    width: 30%;
+    padding: 10px;
+    border: yellowgreen dotted 1px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}

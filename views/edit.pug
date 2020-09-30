@@ -1,0 +1,39 @@
+head
+  script(src='script.js' defer)
+  link(rel='stylesheet', href='./css/index.css')
+body
+  nav
+  a#homeBtn(href='/') Return Home
+  h1= message
+  div#formContainer
+    form(action=route method="POST")
+      div.formAnswer#idContainer
+        p#id=_id
+      div.formAnswer
+        p Title:
+        input#title(type="text" name="title" value=titleEdit)
+      div.formAnswer
+        p Director:
+        input#director(type="text" name="director" value=directorEdit)
+      div.formAnswer  
+        p Released:
+        input#released(type="text" name="released" value=releasedEdit)
+      div.formAnswer
+        p Rating:
+        input#rating(type="text" name="rating" value=ratingEdit)
+      div.formAnswer
+        p Actors:
+        input#actors(type="text" name="actors" value=actorsEdit)
+      div.formAnswer
+        p Score:
+        input#score(type="text" name="score" value=scoreEdit)
+      div.formAnswer
+        p Poster (insert url of desired new poster photo):
+        input#poster(type="text" name="poster" value=posterEdit)
+      div.formAnswer
+        p Synopsis:
+        input#plot(type="text" name="plot" value=plotEdit)
+      div.formAnswer
+        p Genre:
+        input#genre(type="text" name="score" value=genreEdit)
+      input#updateFilmBtn(type="submit" value='Save')
