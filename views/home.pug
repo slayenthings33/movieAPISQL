@@ -32,7 +32,7 @@ html
           #favePoster
           img#poster(src=Poster)
           #faveButns
-            button#detailsBtn(onclick=`getDetails("${film.Title}")`) Details
+            button#detailsBtn(onclick=`getDetails("${film.ID}")`) Details
             button#editBtn(onclick=`editFilmPage('${film.ID}')`) Edit
             button(id=`deleteBtn${index}`, onclick=`deleteFilm("${film.Title}")`) Delete
   script(src="script.js" defer)
