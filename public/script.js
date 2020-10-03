@@ -54,7 +54,7 @@ function getDetails(title) {
   location.replace(filmURL)
 }
 
-function editFilmPage(title) {
-  let urlEdit = `films/editFilm/${title}`;
+function editFilmPage(ID) {
+  let urlEdit = `/films/editFilm/${ID}`;
   location.replace(urlEdit)
 }

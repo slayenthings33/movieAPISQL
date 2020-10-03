@@ -34,7 +34,7 @@ exports.getFilmAPI = (req,res) => {
   fetch(`http://www.omdbapi.com/?i=tt3896198&apikey=8f00377f&t=${req.params.title}`)
   .then(function(response) { //returns a JSON of requested film
     return response.json();
-  }).then(function(data) {
+  }).then(function(data) {        
         res.render("film", {
             movie: data.Title,
             _id:data._id,
@@ -47,7 +47,6 @@ exports.getFilmAPI = (req,res) => {
             plot: data.Plot,
             released: data.Released,
             score: data.imdbRating,
-            awards: data.Awards,
             genre: data.Genre,
             runtime: data.Runtime,
         })
@@ -55,13 +54,18 @@ exports.getFilmAPI = (req,res) => {
 }
 // MODULE TO DISPLAY DETAILS PUG
 exports.getDetails = (req,res) => {
-    db.getMovieDetails(req.params.title)
+    db.getMovieDetails(req.params.ID)
     .then((data)=> {
+        console.log("*********************")
+        console.log(req.params)
         console.log(data)
+        console.log(data.title)
+        console.log(data.Title)
+        console.log("*********************")
         res.status(200)
         .render("details", {
             //variable in pug : name in server.js generated url
-            route: data.Poster,  
+            // route: data.Poster,  
             movieName: data.Title,
             rating: data.Rating,
             runtime: data.Runtime,
@@ -70,8 +74,9 @@ exports.getDetails = (req,res) => {
             actors: data.Actors,
             released: data.Date,
             score: data.Score,
-            plot: data.Plot
-
+            plot: data.Synopsis,
+            route: data.Poster,
+            id: req.params.ID
         })
     }).catch((e)=> console.log("An error has occurred "+e))
 }
@@ -92,12 +97,12 @@ exports.saveFave = (req,res) => {
 
 // MODULE LOAD FORM PUG WITH DETAILS FROM DB 
 exports.getEditFilm = (req,res) => {
-    db.getMovieDetails(req.params.title)
+    db.getMovieDetails(req.params.ID)
     .then((data)=> {
     res.render("edit", {
             route: "/films/postEditFilm",
             message: "Edit your favorite Film!!",
-            _id: data._id,
+            ID: data.ID,
             posterEdit: data.Poster,  
             titleEdit: data.Title,
             ratingEdit: data.Rating,
@@ -105,9 +110,9 @@ exports.getEditFilm = (req,res) => {
             genreEdit: data.Genre,
             directorEdit: data.Director,
             actorsEdit: data.Actors,
-            releasedEdit: data.Date,
+            releasedEdit: data.Released,
             scoreEdit: data.Score,
-            plotEdit:data.Plot
+            plotEdit:data.Synopsis
         })
     }).catch((e)=>console.log(`An error occurred ${e}`))
 }
@@ -116,15 +121,16 @@ exports.saveChanges = (req,res) => {
     console.log("saveChanges module")
     db.updateFilmDoc(req.params.title)
     res.status(200).render("edit", {
-        id: req.params.id,
-        title: req.query.title,
-        rating: req.query.rating,
-        director: req.query.director,
-        actors: req.query.actors,
-        release: req.query.release,
-        score: req.query.score,
-        poster: req.query.poster,
-        plot: req.query.plot
+        ID: req.params.id,
+        Title: req.query.title,
+        Rating: req.query.rating,
+        Director: req.query.director,
+        Actors: req.query.actors,
+        Release: req.query.release,
+        Score: req.query.score,
+        Poster: req.query.poster,
+        Plot: req.query.plot,
+        Runtime: req.query.plot
     })
 } 
 // MODULE TO LOAD CREATE FILM PUG 
@@ -146,10 +152,9 @@ exports.postDeleteFilm = (req,res) => {
 
 // POST METHOD TO EDIT FROM DB 
 exports.postEditFilm = (req,res) => {
-    console.log(req.body)
-    let id = req.body._id;
+    let id = req.body.id;
     console.log("*********UPLOAD FORM DATA***************");
-    console.log(id);
+    console.log(req.body);
     db.updateFilmDoc(id, req.body)
     .then(()=> {
         res

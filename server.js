@@ -1,7 +1,7 @@
-const express = require("express")
-const app = express()
-const port = 3000
-const movie = require("./movie")
+const express = require("express");
+const app = express();
+const port = 3000;
+const movie = require("./movie");
 const bodyParser = require('body-parser');
 
 //***********MIDDLEWARE************//
@@ -31,10 +31,10 @@ app.get('/films/create', movie.createMovie);
 app.get('/films/:title', movie.getFilmAPI);
 
 // MOVIE DETAILS RESULT PAGE
-app.get("/films/filmdetails/:title", movie.getDetails);
+app.get("/films/filmdetails/:ID", movie.getDetails);
 
 // EDIT MOVE RESULTS PAGE 
-app.get("/films/editFilm/:title", movie.getEditFilm) 
+app.get("/films/editFilm/:ID", movie.getEditFilm) 
 
 
 // ----------> POST ROUTES

@@ -10,8 +10,9 @@ html
       input#userInput(type='text') 
       br
       button#searchButton(type='submit') Search
-    div#faveContainer
+    div#faveTitleContainer
       h2 Your favorite films:
+    div#faveContainer
       ul
       each film in films
         #faveItem
@@ -24,7 +25,7 @@ html
               span=film.Director
             #releasedRow
               b Released: 
-              span=film.Date
+              span=film.Released
             #scoreRow
               b Score: 
               span=film.Score
@@ -32,6 +33,6 @@ html
           img#poster(src=Poster)
           #faveButns
             button#detailsBtn(onclick=`getDetails("${film.Title}")`) Details
-            button#editBtn(onclick=`editFilmPage('${film.Title}')`) Edit
+            button#editBtn(onclick=`editFilmPage('${film.ID}')`) Edit
             button(id=`deleteBtn${index}`, onclick=`deleteFilm("${film.Title}")`) Delete
   script(src="script.js" defer)

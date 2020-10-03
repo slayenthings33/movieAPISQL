@@ -4,8 +4,8 @@ let favoriteButton = document.getElementById("favoriteButton");
 
   favoriteButton.addEventListener("click", ()=> {
     console.log("function uploadFave");
-    let movieData = document.getElementsByTagName("span")
-    console.log(movieData);
+    // let movieData = document.getElementsByTagName("span")
+    // console.log(movieData);
     let newMovie={
       "ID": _id.innerText,
       "Title":movieName.innerText,
@@ -19,6 +19,8 @@ let favoriteButton = document.getElementById("favoriteButton");
       "Plot": plot.innerText,
       "Poster": document.getElementById("poster").src,
     }
+    console.log("***************************")
+    console.log(newMovie)
     fetch('/films/save', {
       method: 'POST',
       headers: {

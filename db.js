@@ -17,13 +17,12 @@ const connect = () => {
 //Method to create movie documents in DB from Fave btn
 
 exports.createMovie = async (movie) => {
-  console.log(movie)
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(
-      `INSERT INTO movies (Title, Synopsis, Rating, Runtime, Genre, Director, Actors, Released, Score) VALUES (?,?,?,?,?,?,?,?,?)`, 
-      [movie.Title, movie.Plot, movie.Rating, movie.Runtime,movie.Genre,movie.Director,movie.Actors,movie.Date,movie.Score]);
+      `INSERT INTO movies (Title, Poster, Synopsis, Rating, Runtime, Genre, Director, Actors, Released, Score) VALUES (?,?,?,?,?,?,?,?,?,?)`, 
+      [movie.Title, movie.Poster, movie.Plot, movie.Rating, movie.Runtime,movie.Genre,movie.Director,movie.Actors,movie.Date,movie.Score]);
     console.log("movie uploaded");
     return res;
   } catch (err) {
@@ -36,15 +35,17 @@ exports.createMovie = async (movie) => {
 
 //FIND FILM IN COLLECTION
 
-exports.getMovieDetails = async (movie) => {
+exports.getMovieDetails = async (id) => {
+  console.log(id);
   let conn;
   try {
     conn = await pool.getConnection();
     const res = await conn.query(
-      "SELECT * FROM movies WHERE ID=(?)", [movie._id]
+      "SELECT * FROM movies WHERE ID=(?)", [id]
     );
-    console.log(res);
-    return res;
+    console.log(res[0])
+    console.log(res)
+   return res[0];
   } catch (err) {
     console.log(err);
     return;
@@ -79,6 +80,7 @@ exports.deleteFilmDoc = async(movie) => {
     const res = await conn.query(
       "DELETE FROM movies WHERE Title=(?)", [movie.Title]
     );
+    console.log(`The film ${movie.Title} has been removed from DB`)
     return res;
     } catch (err) {
     console.log(err);
@@ -88,14 +90,17 @@ exports.deleteFilmDoc = async(movie) => {
   }
 }
 
-exports.updateFilmDoc = async(movie) => {
-  console.log(movie)
+exports.updateFilmDoc = async(ID,movie) => {
   let conn;
+  console.log("@@@@@@@@@@@@@@@@@@@@")
+  console.log(ID)
   try {
     conn = await pool.getConnection();
     const res = await conn.query(
-      "DELETE FROM movies WHERE Title=(?)", [movie.Title]
+      `UPDATE movies SET Title=(?), Poster=(?), Synopsis=(?), Rating=(?), Runtime=(?), Genre=(?), Director=(?), Actors=(?), Released=(?), Score=(?) WHERE ID=(?)`, [movie.title, movie.poster, movie.plot, movie.rating, movie.runtime, movie.genre, movie.director, movie.actors, movie.released, movie.score, movie.ID]
     );
+    console.log(res);
+    console.log("Film has been updated to DB");
     return res;
     } catch (err) {
     console.log(err);
@@ -104,33 +109,3 @@ exports.updateFilmDoc = async(movie) => {
     if (conn) conn.release(); //release to pool
   }
 }
-// const client = await connect();
-// console.log("****************")
-// console.log(editedFilm)
-// console.log("++++++++++++++++")
-// console.log(editedFilm.title)
-// result = await client
-//   .db("movieDB")
-//   .collection("movies")
-//   .updateOne(
-//     {"_id": ObjectID(_id) }, // Filtered
-//     { $set: {
-//       "Title": editedFilm.title,
-//       "Released": editedFilm.released,
-//       "Genre": editedFilm.genre,
-//       "Director": editedFilm.director,
-//       "Actors": editedFilm.actors,
-//       "Plot": editedFilm.plot,
-//       "Rating": editedFilm.rating,
-//       "Score": editedFilm.score,
-//       "Poster": editedFilm.route
-//     }}, //UPDATED
-//     {upsert: true}
-//     );
-// console.log(`${result.matchedCount} documents which coincide with request.`);
-// if (result.upsertedCount > 0) { 
-//     console.log(`A document was created with id: ${result.upsertedId._id}`);
-//     return result;
-//   } else {
-//     console.log(`${result.modifiedCount} could not be modified.`);
-// }

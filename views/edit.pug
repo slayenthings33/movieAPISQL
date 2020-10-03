@@ -8,7 +8,7 @@ body
   div#formContainer
     form(action=route method="POST")
       div.formAnswer#idContainer
-        p#id=_id
+        input#id(type="text" name="ID" value=ID)
       div.formAnswer
         p Title:
         input#title(type="text" name="title" value=titleEdit)
@@ -35,5 +35,9 @@ body
         input#plot(type="text" name="plot" value=plotEdit)
       div.formAnswer
         p Genre:
-        input#genre(type="text" name="score" value=genreEdit)
+        input#genre(type="text" name="genre" value=genreEdit)
+      div.formAnswer
+        p Runtime:
+        input#runtime(type="text" name="runtime" value=runtimeEdit)
+      br
       input#updateFilmBtn(type="submit" value='Save')
